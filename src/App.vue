@@ -6,43 +6,22 @@
       app
     >
       <v-list dense>
-        <v-list-tile router :to="{name : 'home'}" exact>
+        <v-list-tile router :to="{name:'home'}">
           <v-list-tile-action>
-            <i class="fas fa-home"></i>
+            <v-icon>home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile >
-        
-        <v-list-tile router :to="{name : 'about'}" exact>
+        </v-list-tile>
+        <v-list-tile router :to="{name: 'login'}">
           <v-list-tile-action>
-            <i class="fas fa-user"></i>
+            <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>About</v-list-tile-title>
+            <v-list-tile-title>login</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-
-        <v-list-tile router :to="{
-          name : 'users',
-          params: {
-            userId: 4321,
-            name: 'test'
-          },
-          query:{
-            group:'member',
-            category:'trial'
-          }
-          }" exact>
-          <v-list-tile-action>
-            <i class="fas fa-user"></i>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Users</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
@@ -59,17 +38,12 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    drawer: null
-  }),
-  props: {
-    source: String
-  },
-  methods : {
-    test() {
-      alert("클릭")
+  export default {
+    data: () => ({
+      drawer: null
+    }),
+    props: {
+      source: String
     }
   }
-}
 </script>
