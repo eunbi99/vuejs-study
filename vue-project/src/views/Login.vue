@@ -38,7 +38,7 @@
                      depressed
                      block
                      large
-                     @click="login()"
+                     @click="login('로그인!')"
                      >
                      로그인</v-btn>
                     </div>
@@ -49,34 +49,32 @@
 </template>
 
 <script>
-
+import {mapState,mapActions} from "Vuex"
 export default {
     data(){
         return {
             email:null,
             password:null,
-            allUsers:[
-                {id:1, name:'eb', email:"eb@gmail.com",password:"12345"},
-                {id:2, name:'ev', email:"ev@gmail.com",password:"12345"}
-            ],
+            
             isError:false, //에러 alert창
             loginSuccess:false
         }
     },
     methods:{
-        login(){
+        ...mapActions(["login"])
+        //login(){
             //전체 유저에서 해당 이메일로 유저를 찾는다.
-            let selectedUser = null
-            this.allUsers.forEach(user =>{
-                if(user.email === this.email) selectedUser = user
-            })
-            selectedUser === null
-              ? (this.isError = true) //null 일경우 isError가 true -> 에러창 뜸
-             : selectedUser.password !== this.password //null 아니고 
-                ? (this.isError = true) //일치하지 않을 경우
-                : (this.loginSuccess = true) //일치하면(else)
+            //let selectedUser = null
+            //this.allUsers.forEach(user =>{
+            //    if(user.email === this.email) selectedUser = user
+            //})
+            //selectedUser === null
+            //  ? (this.isError = true) //null 일경우 isError가 true -> 에러창 뜸
+            // : selectedUser.password !== this.password //null 아니고 
+            //    ? (this.isError = true) //일치하지 않을 경우
+            //    : (this.loginSuccess = true) //일치하면(else)
             // 그 유저의 비밀번호와 입력된 비밀번호를 비교한다.
-        }
+        //}
     }
 }
 </script>
