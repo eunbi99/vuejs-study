@@ -31,7 +31,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    //payload : 폼에서 넘겨받은 인자를 받을 수 있는 곳 
+    addUsers: (state,payload) => {
+      state.allUsers.push(payload)
 
+    }
   },
   actions: {
 

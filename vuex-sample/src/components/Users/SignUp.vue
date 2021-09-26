@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { EventBus } from '@/main.js'
+//import { EventBus } from '@/main.js'
+//import { mapMutations } from 'vuex'
 
   export default {
     data() {
@@ -40,6 +41,7 @@ import { EventBus } from '@/main.js'
       }
     },
     methods: {
+      //...mapMutations(['addUsers']),
       signUp() {
         let userObj = {
           userId: this.userId,
@@ -48,7 +50,8 @@ import { EventBus } from '@/main.js'
           address: this.address,
           src: this.src
         }
-        EventBus.$emit('signUp', userObj)
+        this.$store.commit('addUsers',userObj) //addUsers라는 mutations를 실행(commit)시켜라 + userObj를 인자로 담아 보내라(payload)
+       // this.addUsers(userObj) // userObj를 addUsers의 인자로 넘겨준다.
         this.clearForm()
       },
       clearForm() {
