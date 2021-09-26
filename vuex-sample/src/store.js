@@ -30,6 +30,9 @@ export default new Vuex.Store({
 
     }
   },
+  /* state를 변화시키는 것은 mutations - 동기
+    actions - 비동기 방식 
+  */
   mutations: {
     //payload : 폼에서 넘겨받은 인자를 받을 수 있는 곳 
     addUsers: (state,payload) => {
@@ -37,7 +40,11 @@ export default new Vuex.Store({
 
     }
   },
-  actions: {
+  actions: { 
+    addUsers: ({ commit }, payload) => {  
+      commit('addUsers',payload) // mutations의 addUsers를 commit할 것 이다.
+
+    }
 
   }
 })
