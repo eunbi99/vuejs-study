@@ -4,14 +4,14 @@
             <v-flex xs12>
                 <v-alert
                     class="mb-3"
-                    :value="isError"
+                    :value="isLoginError"
                     type="error"
                  >
                     아이디와 비밀번호를 확인해주세요.
                 </v-alert>
                  <v-alert
                     class="mb-3"
-                    :value="loginSuccess"
+                    :value="isLogin"
                     type="success"
                     >
                     로그인이 완료되었습니다.
@@ -38,7 +38,10 @@
                      depressed
                      block
                      large
-                     @click="login('로그인!')"
+                     @click="login({
+                     email, //v-model의 email에 입력한 값이 들어온다.(= email : email)
+                     password
+                     })"
                      >
                      로그인</v-btn>
                     </div>
@@ -49,32 +52,21 @@
 </template>
 
 <script>
-import {mapState,mapActions} from "Vuex"
+import { mapState, mapActions } from "vuex"
+
 export default {
     data(){
         return {
             email:null,
-            password:null,
-            
-            isError:false, //에러 alert창
-            loginSuccess:false
+            password:null
         }
+    },
+    computed: {
+        ...mapState(["isLogin","isLoginError"])
     },
     methods:{
         ...mapActions(["login"])
-        //login(){
-            //전체 유저에서 해당 이메일로 유저를 찾는다.
-            //let selectedUser = null
-            //this.allUsers.forEach(user =>{
-            //    if(user.email === this.email) selectedUser = user
-            //})
-            //selectedUser === null
-            //  ? (this.isError = true) //null 일경우 isError가 true -> 에러창 뜸
-            // : selectedUser.password !== this.password //null 아니고 
-            //    ? (this.isError = true) //일치하지 않을 경우
-            //    : (this.loginSuccess = true) //일치하면(else)
-            // 그 유저의 비밀번호와 입력된 비밀번호를 비교한다.
-        //}
+        
     }
 }
 </script>
