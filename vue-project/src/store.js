@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import router from './router'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userInfo: null,
     allUsers:[
       {id:1, name:'eb', email:"eb@gmail.com",password:"12345"},
       {id:2, name:'ev', email:"ev@gmail.com",password:"12345"}
@@ -16,9 +17,10 @@ export default new Vuex.Store({
     //mutations는 state 값을 변화시킨다.
 
     //1. 로그인 성공 시
-    loginSuccess(state){
+    loginSuccess(state,payload){
       state.isLogin = true
       state.isLoginError = false
+      state.userInfo = payload
     },
     //2. 로그인 실패 시
     loginError(state){
@@ -36,11 +38,14 @@ export default new Vuex.Store({
             state.allUsers.forEach(user =>{
                 if(user.email === loginObj.email) selectedUser = user
             })
-            selectedUser === null
-              ? commit("loginError") //null 일경우 mutations의 loginError를 커밋
-             : selectedUser.password !== loginObj.password //null 아니고 
-                ? commit("loginError") //일치하지 않을 경우 loginError 커밋
-                : commit("loginSuccess") //로그인 성공시 loginSuccess 커밋
+            if (selectedUser === null || selectedUser.password !== loginObj.password  )
+                 commit("loginError") //일치하지 않을 경우 loginError 커밋
+            else{
+              commit("loginSuccess",selectedUser) //로그인한 객체가 selectedUser(payload)로 넘어온다.
+              router.push({name : "mypage"}) //mypage라는 라우터로 푸시
+            }
+            
+            
             
     }
   }
