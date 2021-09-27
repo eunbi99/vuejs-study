@@ -26,6 +26,11 @@ export default new Vuex.Store({
     loginError(state){
       state.isLogin = false
       state.isLoginError = true
+    },
+    logout(state){
+      state.isLogin= false,
+      state.isLoginError=false,
+      state.userInfo = null
     }
   },
   actions: {
@@ -44,9 +49,10 @@ export default new Vuex.Store({
               commit("loginSuccess",selectedUser) //로그인한 객체가 selectedUser(payload)로 넘어온다.
               router.push({name : "mypage"}) //mypage라는 라우터로 푸시
             }
-            
-            
-            
+    },
+    logout({ commit }) {
+      commit("logout") //로그아웃을 할때 logout 함수 커밋 후 home으로 이동.
+      router.push({ name: "home" }) 
     }
   }
 })
